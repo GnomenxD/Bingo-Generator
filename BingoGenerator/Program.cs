@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Runtime.Intrinsics.Arm;
 using BingoGenerator;
 
 internal class Program
@@ -182,11 +177,14 @@ internal class Program
 					int wordsHashCode = combinedWords.GetHashCode();
 
 					// Print the individual mat generation message including the words and hashcode
-					Console.WriteLine($"Generating mat [{counter} / {numberOfMatsToGenerate}]: {wordsHashCode}");
+					Console.WriteLine($"Generating mat [{counter + 1} / {numberOfMatsToGenerate}]: {wordsHashCode}");
 					counter++;
 					numberOfMats--;
 				}
 
+				string paperFileName = $"Paper_{paperIndex}.png";
+				string paperFilePath = Path.Combine(Environment.CurrentDirectory, paperFileName);
+				paper.Save(paperFilePath, ImageFormat.Png);
 				paperIndex++;
 			}
 		}
